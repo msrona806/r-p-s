@@ -1,10 +1,10 @@
 // -------GLOBAL VARIABLES--------
-const userScore = 0;
-const computerScore = 0;
+let userScore = 0;
+let computerScore = 0;
 const userScore_span = document.getElementById("user-score");
 const ComputerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".score-board");
-const result_div = document.querySelector(".result");
+const result_p = document.querySelector(".result > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
@@ -16,27 +16,54 @@ function getComputerChoice() {
   return choices[randomNumber];
 }
 
+function win(user, computer) {
+ userScore++;
+ userScore_span.innerHTML = userScore;
+ ComputerScore_span.innerHTML = computerScore; 
+ result_div.innerHTML = user + " beats " + computer + "! You win!!"; 
+}
+
+function lose(){
+  // computerScore++;
+}
+
+function draw(){
+  console.log("It's a draw!!")
+}
+
 //function to handle user's choice
 function game(userChoice) {
   const computerChoice = getComputerChoice();
-  console.log("computer chose " + computerChoice)
-  console.log("you chose " + userChoice)
+  switch (userChoice + computerChoice) {
+    case "rs":
+    case "pr":
+    case "sp":
+      win(userChoice, computerChoice);
+      break;
+    case "rp":
+    case "ps":
+    case "sr":
+      lose(userChoice, computerChoice);
+      break;
+    case "rr":
+    case "pp":
+    case "ss":
+      draw(userChoice, computerChoice);
+      break;
+  }
 }
 
 function main() {  
   rock_div.addEventListener('click', function() {
     game('r');
-    console.log("You clicked rock!");
   })
   
   paper_div.addEventListener('click', function() {
     game('p');
-    console.log("You clicked paper!");
   })
 
   scissors_div.addEventListener('click', function() {
     game('s');
-    console.log("You clicked scissors!");
   })
 };
 
