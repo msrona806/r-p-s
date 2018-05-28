@@ -30,7 +30,8 @@ function win(user, computer) {
   ComputerScore_span.innerHTML = computerScore; 
   result_p.innerHTML = `${convertToWord(user)} beats ${convertToWord(computer)} - You win!!`;
   user_div.classList.add('green-glow');
-  setTimeout(function() {user_div.classList.remove('green-glow') }, 500);
+  //function syntax using ES6
+  setTimeout(() => user_div.classList.remove('green-glow'), 500);
 }
 
 function lose(user, computer) {
