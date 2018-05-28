@@ -16,19 +16,38 @@ function getComputerChoice() {
   return choices[randomNumber];
 }
 
+//Change letters to words to make more readable
+function convertToWord(letter) {
+  if (letter === "r") return "Rock";
+  if (letter === "p") return "Paper";
+  return "Scissors";
+}
+
 function win(user, computer) {
- userScore++;
- userScore_span.innerHTML = userScore;
- ComputerScore_span.innerHTML = computerScore; 
- result_div.innerHTML = user + " beats " + computer + "! You win!!"; 
+  const user_div = document.getElementById(user);
+  userScore++;
+  userScore_span.innerHTML = userScore;
+  ComputerScore_span.innerHTML = computerScore; 
+  result_p.innerHTML = `${convertToWord(user)} beats ${convertToWord(computer)} - You win!!`;
+  user_div.classList.add('green-glow');
+  setTimeout(function() {user_div.classList.remove('green-glow') }, 500);
 }
 
-function lose(){
-  // computerScore++;
+function lose(user, computer) {
+  const user_div = document.getElementById(user);
+  computerScore++;
+  userScore_span.innerHTML = userScore;
+  ComputerScore_span.innerHTML = computerScore; 
+  result_p.innerHTML = `${convertToWord(computer)} beats ${convertToWord(user)} - You lose!!`;
+  user_div.classList.add('red-glow');
+  setTimeout(function() {user_div.classList.remove('red-glow') }, 500); 
 }
 
-function draw(){
-  console.log("It's a draw!!")
+function draw(user, computer) {
+  const user_div = document.getElementById(user);
+  result_p.innerHTML = `${convertToWord(user)} against ${convertToWord(computer)} - It's a draw!!`; 
+  user_div.classList.add('gray-glow');
+  setTimeout(function() {user_div.classList.remove('gray-glow') }, 500);
 }
 
 //function to handle user's choice
